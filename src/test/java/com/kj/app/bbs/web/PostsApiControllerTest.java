@@ -58,69 +58,69 @@ public class PostsApiControllerTest {
         postsRepository.deleteAll();
     }
 
-    @Test
-    @WithMockUser(roles = "USER")
-    public void Posts_등록된다() throws Exception {
-        //given
-        String title = "title";
-        String content = "content";
-        PostsSaveRequestDto requestDto = PostsSaveRequestDto.builder()
-                .title(title)
-                .content(content)
-                .author("author")
-                .build();
-
-        String url = "http://localhost:" + port + "/api/v1/posts";
-
-        //when
-//        mvc.perform(post(url))
-//                .contentType(MediaType.APPLICATION_JSON_UTF8)
-//                .content(new ObjectMapper().writeValueAsSrting(requestDto));
-        ResponseEntity<Long> responseEntity = restTemplate.postForEntity(url, requestDto, Long.class);
-
-        //then
-        assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
-        assertNotNull(responseEntity.getBody());
-
-        List<Posts> all = postsRepository.findAll();
-        assertEquals(all.get(0).getTitle(), title);
-        assertEquals(all.get(0).getContent(), content);
-    }
-
-    @Test
-    @WithMockUser(roles = "USER")
-    public void Posts_수정된다() throws Exception {
-        //given
-        Posts savedPosts = postsRepository.save(Posts.builder()
-                .title("title")
-                .content("content")
-                .author("author")
-                .build());
-
-        Long updateId = savedPosts.getId();
-
-        String expectedTitle = "title2";
-        String expectedContent = "content2";
-
-        PostsUpdateRequestDto requestDto = PostsUpdateRequestDto.builder()
-                .title(expectedTitle)
-                .content(expectedContent)
-                .build();
-
-        String url = "http://localhost:" + port + "/api/v1/posts/" + updateId;
-
-        HttpEntity<PostsUpdateRequestDto> requestEntity = new HttpEntity<>(requestDto);
-
-        //when
-        ResponseEntity<Long> responseEntity = restTemplate.exchange(url, HttpMethod.PUT, requestEntity, Long.class);
-
-        //then
-        assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
-        assertNotEquals(responseEntity.getBody(), 0L);
-
-        List<Posts> all = postsRepository.findAll();
-        assertEquals(all.get(0).getTitle(), expectedTitle);
-        assertEquals(all.get(0).getContent(), expectedContent);
-
-    }
+//    @Test
+//    @WithMockUser(roles = "USER")
+//    public void Posts_등록된다() throws Exception {
+//        //given
+//        String title = "title";
+//        String content = "content";
+//        PostsSaveRequestDto requestDto = PostsSaveRequestDto.builder()
+//                .title(title)
+//                .content(content)
+//                .author("author")
+//                .build();
+//
+//        String url = "http://localhost:" + port + "/api/v1/posts";
+//
+//        //when
+////        mvc.perform(post(url))
+////                .contentType(MediaType.APPLICATION_JSON_UTF8)
+////                .content(new ObjectMapper().writeValueAsSrting(requestDto));
+//        ResponseEntity<Long> responseEntity = restTemplate.postForEntity(url, requestDto, Long.class);
+//
+//        //then
+//        assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
+//        assertNotNull(responseEntity.getBody());
+//
+//        List<Posts> all = postsRepository.findAll();
+//        assertEquals(all.get(0).getTitle(), title);
+//        assertEquals(all.get(0).getContent(), content);
+//    }
+//
+//    @Test
+//    @WithMockUser(roles = "USER")
+//    public void Posts_수정된다() throws Exception {
+//        //given
+//        Posts savedPosts = postsRepository.save(Posts.builder()
+//                .title("title")
+//                .content("content")
+//                .author("author")
+//                .build());
+//
+//        Long updateId = savedPosts.getId();
+//
+//        String expectedTitle = "title2";
+//        String expectedContent = "content2";
+//
+//        PostsUpdateRequestDto requestDto = PostsUpdateRequestDto.builder()
+//                .title(expectedTitle)
+//                .content(expectedContent)
+//                .build();
+//
+//        String url = "http://localhost:" + port + "/api/v1/posts/" + updateId;
+//
+//        HttpEntity<PostsUpdateRequestDto> requestEntity = new HttpEntity<>(requestDto);
+//
+//        //when
+//        ResponseEntity<Long> responseEntity = restTemplate.exchange(url, HttpMethod.PUT, requestEntity, Long.class);
+//
+//        //then
+//        assertEquals(responseEntity.getStatusCode(), HttpStatus.OK);
+//        assertNotEquals(responseEntity.getBody(), 0L);
+//
+//        List<Posts> all = postsRepository.findAll();
+//        assertEquals(all.get(0).getTitle(), expectedTitle);
+//        assertEquals(all.get(0).getContent(), expectedContent);
+//
+//    }
 }
