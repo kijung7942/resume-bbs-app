@@ -36,7 +36,9 @@ dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-mustache'
 
     //MariaDB
+    implementation('org.springframework.boot:spring-boot-starter-jdbc')
     implementation('org.mariadb.jdbc:mariadb-java-client')
+
 
     //Security
     implementation('org.springframework.boot:spring-boot-starter-oauth2-client') // 권한 관련
