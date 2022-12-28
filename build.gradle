@@ -48,7 +48,7 @@ dependencies {
     testImplementation("org.springframework.security:spring-security-test") // 권한 관련
 
     //Auto Compile
-    developmentOnly'org.springframework.boot:spring-boot-devtools:'
+//    developmentOnly'org.springframework.boot:spring-boot-devtools:'
 }
 
 test {
