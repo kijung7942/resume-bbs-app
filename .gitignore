@@ -6,3 +6,6 @@ application-oauth.properties
 /build/
 src/main/resources/application-oauth.properties
 bin/main/application.properties
+/.gradlew/
+*.out
+application-real-db.properties
