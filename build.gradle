@@ -37,7 +37,7 @@ dependencies {
 
     //MariaDB
     implementation('org.springframework.boot:spring-boot-starter-jdbc')
-    implementation('org.mariadb.jdbc:mariadb-java-client')
+    runtimeOnly('org.mariadb.jdbc:mariadb-java-client')
 
 
     //Security
